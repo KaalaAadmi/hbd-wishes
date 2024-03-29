@@ -9,7 +9,7 @@ import videoBg from "./video/vid-background.webm";
 // import Confetti from "react-confetti/dist/types/Confetti";
 import ConfettiAnimation from "./components/Confetti";
 import { useFullScreenHandle } from "react-full-screen";
-import vBg from "./video/videoBg.mp4";
+// import vBg from "./video/videoBg.mp4";
 
 function App() {
   const handle = useFullScreenHandle(); // Get handle for fullscreen functionality
