@@ -29,11 +29,11 @@ const Cards = ({ isLast, setIsLast }) => {
     setCurrentCardIndex(
       (prevIndex) => (prevIndex + step + images.length) % images.length
     );
-    if (currentCardIndex === images.length - 1) {
-      setIsLast(true);
-    } else {
-      setIsLast(false);
-    }
+    // if (currentCardIndex === images.length - 1) {
+    //   setIsLast(true);
+    // } else {
+    //   setIsLast(false);
+    // }
   };
 
   const transitions = useTransition(currentCardIndex, {
