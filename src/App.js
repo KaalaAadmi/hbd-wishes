@@ -1,16 +1,18 @@
 // App.js
 import React, { useState, useEffect } from "react";
-import ConfettiAnimation from "./Confetti"; // Import the Confetti component
-import Cards from "./Cards";
-import LandscapeWarning from "./LandscapeWarning";
-import TutorialModal from "./TutorialModal";
-import "./styles.css";
+import "./App.css";
+import Cards from "./components/Cards";
+import LandscapeWarning from "./components/LandscapeWarning";
+import TutorialModal from "./components/TutorialModal";
+import backgroundVideo from "./video/vid-background.mp4";
+// import Confetti from "react-confetti/dist/types/Confetti";
+import ConfettiAnimation from "./components/Confetti";
 
-const App = () => {
+function App() {
   const [isPortrait, setIsPortrait] = useState(
     window.innerWidth < window.innerHeight
   );
-
+  const [isLast, setIsLast] = useState(false);
   useEffect(() => {
     const handleResize = () => {
       setIsPortrait(window.innerWidth < window.innerHeight);
@@ -21,8 +23,9 @@ const App = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); // Empty dependency array ensures that the effect runs only once, similar to componentDidMount
 
+  console.log("isPortrait:", isPortrait);
   useEffect(() => {
     // Check if fullscreen is supported by the browser
     if (document.fullscreenEnabled) {
@@ -32,24 +35,26 @@ const App = () => {
       }
     }
   }, [isPortrait]);
-
   return (
     <div className="App">
       {isPortrait ? (
         <LandscapeWarning />
       ) : (
         <div id="container">
-          <div id="background-video">
+          <div id="video-container">
             {/* Your background video goes here */}
+            <video id="background-video" autoPlay loop muted>
+              <source src={backgroundVideo} type="video/mp4" />
+            </video>
+            <div id="video"></div>
           </div>
-          <Cards />
+          <Cards isLast={isLast} setIsLast={setIsLast} />
           <TutorialModal />
-          {/* Render ConfettiAnimation component on the entire page */}
-          {/* <ConfettiAnimation /> */}
+          {isLast && <ConfettiAnimation />}
         </div>
       )}
     </div>
   );
-};
+}
 
 export default App;
