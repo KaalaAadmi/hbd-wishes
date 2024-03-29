@@ -1,18 +1,16 @@
 // App.js
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import Cards from "./components/Cards";
-import LandscapeWarning from "./components/LandscapeWarning";
-import TutorialModal from "./components/TutorialModal";
-import backgroundVideo from "./video/vid-background.mp4";
-// import Confetti from "react-confetti/dist/types/Confetti";
-import ConfettiAnimation from "./components/Confetti";
+import ConfettiAnimation from "./Confetti"; // Import the Confetti component
+import Cards from "./Cards";
+import LandscapeWarning from "./LandscapeWarning";
+import TutorialModal from "./TutorialModal";
+import "./styles.css";
 
-function App() {
+const App = () => {
   const [isPortrait, setIsPortrait] = useState(
     window.innerWidth < window.innerHeight
   );
-  const [isLast, setIsLast] = useState(false);
+
   useEffect(() => {
     const handleResize = () => {
       setIsPortrait(window.innerWidth < window.innerHeight);
@@ -23,9 +21,17 @@ function App() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []); // Empty dependency array ensures that the effect runs only once, similar to componentDidMount
+  }, []);
 
-  console.log("isPortrait:", isPortrait);
+  useEffect(() => {
+    // Check if fullscreen is supported by the browser
+    if (document.fullscreenEnabled) {
+      // If in portrait mode on mobile, request fullscreen
+      if (isPortrait && window.innerWidth <= 768) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  }, [isPortrait]);
 
   return (
     <div className="App">
@@ -33,20 +39,17 @@ function App() {
         <LandscapeWarning />
       ) : (
         <div id="container">
-          <div id="video-container">
+          <div id="background-video">
             {/* Your background video goes here */}
-            <video id="background-video" autoPlay loop muted>
-              <source src={backgroundVideo} type="video/mp4" />
-            </video>
-            <div id="video"></div>
           </div>
-          <Cards isLast={isLast} setIsLast={setIsLast} />
+          <Cards />
           <TutorialModal />
-          {isLast && <ConfettiAnimation />}
+          {/* Render ConfettiAnimation component on the entire page */}
+          {/* <ConfettiAnimation /> */}
         </div>
       )}
     </div>
   );
-}
+};
 
 export default App;
