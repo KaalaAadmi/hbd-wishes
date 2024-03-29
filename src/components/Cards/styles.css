@@ -54,7 +54,7 @@
 @media (max-width: 768px) {
   .card {
     width: 400px;
-    height: 200px;
+    height: 227px;
   }
   .card img {
     object-fit: cover;
