@@ -5,6 +5,7 @@ import Cards from "./components/Cards";
 import LandscapeWarning from "./components/LandscapeWarning";
 import TutorialModal from "./components/TutorialModal";
 import backgroundVideo from "./video/vid-background.mp4";
+import videoBg from "./video/vid-background.webm";
 // import Confetti from "react-confetti/dist/types/Confetti";
 import ConfettiAnimation from "./components/Confetti";
 
@@ -45,6 +46,7 @@ function App() {
             {/* Your background video goes here */}
             <video id="background-video" autoPlay loop muted>
               <source src={backgroundVideo} type="video/mp4" />
+              <source src={videoBg} type="video/webm" />
             </video>
             <div id="video"></div>
           </div>
