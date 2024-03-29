@@ -56,4 +56,7 @@
     width: 400px;
     height: 200px;
   }
+  .card img {
+    object-fit: contain;
+  }
 }
