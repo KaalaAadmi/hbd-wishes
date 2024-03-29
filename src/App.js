@@ -29,8 +29,8 @@ function App() {
   useEffect(() => {
     // Check if fullscreen is supported by the browser
     if (document.fullscreenEnabled) {
-      // If in portrait mode on mobile, request fullscreen
-      if (isPortrait && window.innerWidth <= 768) {
+      // If in landscape mode on mobile, request fullscreen
+      if (!isPortrait && window.innerWidth <= 768) {
         document.documentElement.requestFullscreen();
       }
     }
