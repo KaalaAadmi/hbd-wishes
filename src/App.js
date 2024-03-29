@@ -8,8 +8,11 @@ import backgroundVideo from "./video/vid-background.mp4";
 import videoBg from "./video/vid-background.webm";
 // import Confetti from "react-confetti/dist/types/Confetti";
 import ConfettiAnimation from "./components/Confetti";
+import { useFullScreenHandle } from "react-full-screen";
 
 function App() {
+  const handle = useFullScreenHandle(); // Get handle for fullscreen functionality
+
   const [isPortrait, setIsPortrait] = useState(
     window.innerWidth < window.innerHeight
   );
@@ -28,14 +31,11 @@ function App() {
 
   console.log("isPortrait:", isPortrait);
   useEffect(() => {
-    // Check if fullscreen is supported by the browser
-    if (document.fullscreenEnabled) {
-      // If in landscape mode on mobile, request fullscreen
-      if (!isPortrait && window.innerWidth <= 768) {
-        document.documentElement.requestFullscreen();
-      }
+    // If in landscape mode on mobile, request fullscreen
+    if (!isPortrait && window.innerWidth <= 768) {
+      handle.enter();
     }
-  }, [isPortrait]);
+  }, [isPortrait, handle]);
   return (
     <div className="App">
       {isPortrait ? (
