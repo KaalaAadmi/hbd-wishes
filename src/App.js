@@ -9,10 +9,13 @@ import videoBg from "./video/vid-background.webm";
 // import Confetti from "react-confetti/dist/types/Confetti";
 import ConfettiAnimation from "./components/Confetti";
 import { useFullScreenHandle } from "react-full-screen";
+import vBg from "./video/videoBg.mp4";
 
 function App() {
   const handle = useFullScreenHandle(); // Get handle for fullscreen functionality
-
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videos = ["video/vid-background.mp4", "video/videoBg.mp4"]; // Array of video file names
   const [isPortrait, setIsPortrait] = useState(
     window.innerWidth < window.innerHeight
   );
@@ -36,6 +39,10 @@ function App() {
       handle.enter();
     }
   }, [isPortrait, handle]);
+  // Function to handle switching to the next video
+  const nextVideo = () => {
+    setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+  };
   return (
     <div className="App">
       {isPortrait ? (

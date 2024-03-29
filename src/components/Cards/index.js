@@ -57,16 +57,15 @@ const Cards = ({ isLast, setIsLast }) => {
             }`}
             alt=""
           />
-          {/* Render ConfettiAnimation component when the last card is visible */}
-          {index === images.length - 1 && (
-            // {setIsLast(!isLast)}
-            <ConfettiAnimation
-              width={window.innerWidth}
-              height={window.innerHeight}
-            />
-          )}
         </animated.div>
       ))}
+      {/* Render ConfettiAnimation component when the last card is visible */}
+      {currentCardIndex === images.length - 1 && (
+        <ConfettiAnimation
+          width={window.innerWidth}
+          height={window.innerHeight}
+        />
+      )}
     </div>
   );
 };
