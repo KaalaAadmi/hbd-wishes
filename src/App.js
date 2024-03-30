@@ -9,6 +9,8 @@ import videoBg from "./video/vid-background.webm";
 // import Confetti from "react-confetti/dist/types/Confetti";
 import ConfettiAnimation from "./components/Confetti";
 import { useFullScreenHandle } from "react-full-screen";
+import Favicon from "react-favicon";
+
 // import vBg from "./video/videoBg.mp4";
 
 function App() {
@@ -46,21 +48,27 @@ function App() {
   return (
     <div className="App">
       {isPortrait ? (
-        <LandscapeWarning />
+        <>
+          <Favicon url="logo2.png" />
+          <LandscapeWarning />
+        </>
       ) : (
-        <div id="container">
-          <div id="video-container">
-            {/* Your background video goes here */}
-            <video id="background-video" autoPlay loop muted>
-              <source src={backgroundVideo} type="video/mp4" />
-              <source src={videoBg} type="video/webm" />
-            </video>
-            <div id="video"></div>
+        <>
+          <Favicon url="logo2.png" />
+          <div id="container">
+            <div id="video-container">
+              {/* Your background video goes here */}
+              <video id="background-video" autoPlay loop muted>
+                <source src={backgroundVideo} type="video/mp4" />
+                <source src={videoBg} type="video/webm" />
+              </video>
+              <div id="video"></div>
+            </div>
+            <Cards isLast={isLast} setIsLast={setIsLast} />
+            <TutorialModal />
+            {isLast && <ConfettiAnimation />}
           </div>
-          <Cards isLast={isLast} setIsLast={setIsLast} />
-          <TutorialModal />
-          {isLast && <ConfettiAnimation />}
-        </div>
+        </>
       )}
     </div>
   );
